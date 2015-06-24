@@ -35,6 +35,6 @@ module DatabaseClassMethods
       results.each do |result_hash|
         results_as_objects << self.new(result_hash)
       end
-      return results_as_objects   
+      return results_as_objects.first   
   end
 end

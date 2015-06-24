@@ -15,7 +15,7 @@ class Artist
     @name = options["name"]
   end
   
-  # Check to see if name exisits, if so, return object.
+  # Check to see if name exisits, if so, returns Array with Artist Object.
   def self.exist(name)
     get_name = CONNECTION.execute("SELECT id FROM artists WHERE name = '#{name}';") 
     if get_name.count != 0
@@ -25,11 +25,28 @@ class Artist
     end
   end
   
-  # CREATE Artist record, returns an object.
+  # CREATE Artist record, returns an Artist Object.
   def self.add(name)
     CONNECTION.execute("INSERT INTO artists (name) VALUES ('#{name}');")
     id = CONNECTION.last_insert_row_id
     Artist.find(id)
   end
-end
  
+  # Utility method to change a current name to new name. Returns an 
+  # empty Array.
+  def change_name(new_name)
+    CONNECTION.execute("UPDATE artists SET name = '#{new_name}' WHERE id = #{@id};")
+  end
+
+  # Utility method to delete a current Artist. Does not allow an Artist to be
+  # deleted if its ID is used in the albums_artists table. Returns Boolean.
+  def delete
+    artists_in_table = CONNECTION.execute("SELECT COUNT(*) FROM albums_artists WHERE artist_id = #{@id};")
+    if artists_in_table.first[0] == 0
+      CONNECTION.execute("DELETE FROM artists WHERE id = #{@id};")
+      true
+    else
+      false
+    end
+  end
+end
