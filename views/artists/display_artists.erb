@@ -1,0 +1,13 @@
+<% x = Artist.find(params["number"].to_i)%>
+
+Here Are The <%= x.name %> Listings:
+
+  <ul>  
+    <%x.truck_parts.each do |object| %>
+    <li>
+      <%= object%>
+    </li>
+    <% end %>
+  </ul> 
+
+<p><a href="../search_parts_category">Search again?</a></p>

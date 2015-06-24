@@ -1,0 +1,14 @@
+<p>Choose your Artist and we will display the Albums they are featured on:</p>
+
+<ul>  
+<% Artist.all.each do |object| %>
+ <li>
+   <a href="artists/display_artist <%= object.id %>">
+     
+     <%= object.artist %>
+     
+     
+   </a></li>
+<% end %>
+</ul> 
+  <p><a href="home">Nevermind, return home.</a></p>

@@ -1,5 +1,3 @@
-require "sqlite3"
-
 # Load/create our database for this program.
 CONNECTION = SQLite3::Database.new("fania.db")
 
