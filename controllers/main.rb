@@ -9,6 +9,6 @@ get "/artists/list_artists" do
   erb :"/artists/list_artists"
 end
 
-get "/artists/display_artists:number" do
+get "/artists/display_artists/:number" do
   erb :"/artists/display_artists"
 end

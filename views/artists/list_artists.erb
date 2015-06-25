@@ -3,12 +3,10 @@
 <ul>  
 <% Artist.all.each do |object| %>
  <li>
-   <a href="artists/display_artist <%= object.id %>">
+   <a href="display_artists/<%= object.id %>">
      
      <%= object.name %>
-     
      
    </a></li>
 <% end %>
 </ul> 
-  <p><a href="../home">Nevermind, return home.</a></p>

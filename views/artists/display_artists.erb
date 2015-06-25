@@ -3,11 +3,10 @@
 Here Are The <%= x.name %> Listings:
 
   <ul>  
-    <%x.truck_parts.each do |object| %>
+    <%x.find_albums.each do |object| %>
     <li>
-      <%= object%>
+      <%= object.title%>
     </li>
     <% end %>
   </ul> 
 
-<p><a href="../search_parts_category">Search again?</a></p>
