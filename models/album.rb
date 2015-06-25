@@ -7,6 +7,8 @@ class Album
   
   # Initializes a new album object
   #
+  # options{} - Hash of arguments
+  #
   # id (optional) - Integer of the album record in albums table
   #
   # title (optional) - String of the title in the album table

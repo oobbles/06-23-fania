@@ -5,9 +5,11 @@ class Style
   attr_reader :id
   attr_accessor :name
   
-  # Initializes a new album object
+  # Initializes a new style object
   #
-  # id (optional) - Integer of the album record in styles table
+  # options{} - Hash of arguments
+  #
+  # id (optional) - Integer of the style in styles table
   #
   # name (optional) - String of the name in the styles table
   def initialize(options={})

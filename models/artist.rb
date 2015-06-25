@@ -5,9 +5,11 @@ class Artist
   attr_reader :id
   attr_accessor :name
   
-  # Initializes a new album object
+  # Initializes a new artist object
   #
-  # id (optional) - Integer of the album record in artists table
+  # options{} - Hash of arguments
+  #
+  # id (optional) - Integer of the artist in artists table
   #
   # name (optional) - String of the name in the artists table
   def initialize(options={})
@@ -15,7 +17,11 @@ class Artist
     @name = options["name"]
   end
   
-  # Check to see if name exisits, if so, returns Array with Artist Object.
+  # Check to see if name exisits
+  #
+  # name - String
+  #
+  # Returns Array with Artist Object or if no such name exists, returns false
   def self.exist(name)
     get_name = CONNECTION.execute("SELECT id FROM artists WHERE name = '#{name}';") 
     if get_name.count != 0
@@ -25,21 +31,30 @@ class Artist
     end
   end
   
-  # CREATE Artist record, returns an Artist Object.
+  # CREATE Artist record,
+  #
+  # name - String
+  #
+  # Returns an Artist Object
   def self.add(name)
     CONNECTION.execute("INSERT INTO artists (name) VALUES ('#{name}');")
     id = CONNECTION.last_insert_row_id
     Artist.find(id)
   end
  
-  # Utility method to change a current name to new name. Returns an 
-  # empty Array.
+  # Utility method to change a current name to new name
+  # 
+  # new_name - String used to replace name
+  #
+  # Returns an empty Array.
   def change_name(new_name)
     CONNECTION.execute("UPDATE artists SET name = '#{new_name}' WHERE id = #{@id};")
   end
 
   # Utility method to delete a current Artist. Does not allow an Artist to be
-  # deleted if its ID is used in the albums_artists table. Returns Boolean.
+  # deleted if its ID is used in the albums_artists table. 
+  #
+  # Returns Boolean.
   def delete
     artists_in_table = CONNECTION.execute("SELECT COUNT(*) FROM albums_artists WHERE artist_id = #{@id};")
     if artists_in_table.first[0] == 0
@@ -51,8 +66,9 @@ class Artist
   end
   
   # Method goes to lookup table to get all albums where there is a match with
-  # the artist id.  It then uses the aray of album_ids as an argument for the 
-  # class method find_many.  Returns an Array of Album Objects.
+  # the artist id.  
+  # 
+  # Returns an Array of Album Objects.
   def find_albums
     album_ids =[]
     results = CONNECTION.execute("SELECT * FROM albums_artists WHERE artist_id = #{@id};")
@@ -62,3 +78,4 @@ class Artist
       Album.find_many(album_ids)
   end
 end
+
