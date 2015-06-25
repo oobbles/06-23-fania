@@ -49,4 +49,22 @@ class Artist
       false
     end
   end
+  
+  # Method goes to lookup table to get all albums where there is a match with
+  # the artist id.  It then uses the aray of album_ids as an argument for the 
+  # class method find_many.  Returns an Array of Album Objects.
+  def find_albums
+    album_ids =[]
+    results = CONNECTION.execute("SELECT * FROM albums_artists WHERE artist_id = #{@id};")
+      results.each do |hash|
+        album_ids << hash["album_id"]
+      end
+      Album.find_many(album_ids)
+      
+      end
+    
+  
+  
+  
+  
 end
