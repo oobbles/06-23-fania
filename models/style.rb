@@ -77,6 +77,25 @@ class Style
       end
       Album.find_many(album_ids)
   end
+  
+  # Method goes to lookup table to get all album_ids where there is a match with
+  # the style_ids.  Does a second look up to match album_ids to artist_ids.
+  # 
+  # Returns an Array of Artist Objects.
+  def find_artists
+    album_ids = []
+    album_results = CONNECTION.execute("SELECT * FROM albums_styles WHERE style_id = #{@id};")
+      album_results.each do |hash|
+        album_ids << hash["album_id"]
+      end
+      artist_ids = []
+      artist_results = CONNECTION.execute("SELECT * FROM albums_artists WHERE album_id IN (#{album_ids.join(",")})")
+      artist_results.each do |hash|
+        artist_ids << hash["artist_id"]
+      end
+    
+      Artist.find_many(artist_ids)
+  end
 end
 
 
