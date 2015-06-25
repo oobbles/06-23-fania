@@ -60,11 +60,5 @@ class Artist
         album_ids << hash["album_id"]
       end
       Album.find_many(album_ids)
-      
-      end
-    
-  
-  
-  
-  
+  end
 end
