@@ -31,7 +31,7 @@ class Artist
     end
   end
   
-  # CREATE Artist record,
+  # CREATE Artist record
   #
   # name - String
   #

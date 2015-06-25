@@ -9,7 +9,7 @@ class Style
   #
   # options{} - Hash of arguments
   #
-  # id (optional) - Integer of the style in styles table
+  # id (optional) - Integer of the style record in styles table
   #
   # name (optional) - String of the name in the styles table
   def initialize(options={})
@@ -17,10 +17,66 @@ class Style
     @name = options["name"]
   end
   
-  # CREATE Style record, returns an empty Array.
+  # CREATE Style record
+  #
+  # name - String
+  #
+  # Returns a Style Object
   def self.add(name)
-    CONNECTION.execute("INSERT INTO albums (name) VALUES ('#{name}';")
-    return CONNECTION.last_insert_row_id
+    CONNECTION.execute("INSERT INTO styles (name) VALUES ('#{name}');")
+    id = CONNECTION.last_insert_row_id
+    Style.find(id)
   end
   
+  # Check to see if name exisits
+  #
+  # name - String
+  #
+  # Returns Array with Style Object or if no such name exists, returns false
+  def self.exist(name)
+    get_name = CONNECTION.execute("SELECT id FROM styles WHERE name = '#{name}';") 
+    if get_name.count != 0
+      Style.find(get_name.first["id"])
+    else 
+      false #run the self.add to add the name
+    end
+  end
+  
+  # Utility method to change a current name to new name
+  # 
+  # new_name - String used to replace name
+  #
+  # Returns an empty Array.
+  def change_name(new_name)
+    CONNECTION.execute("UPDATE styles SET name = '#{new_name}' WHERE id = #{@id};")
+  end
+
+  # Utility method to delete a current Artist. Does not allow an Artist to be
+  # deleted if its ID is used in the albums_artists table. 
+  #
+  # Returns Boolean.
+  def delete
+    styles_in_table = CONNECTION.execute("SELECT COUNT(*) FROM albums_styles WHERE style_id = #{@id};")
+    if styles_in_table.first[0] == 0
+      CONNECTION.execute("DELETE FROM styles WHERE id = #{@id};")
+      true
+    else
+      false
+    end
+  end
+  
+  # Method goes to lookup table to get all albums where there is a match with
+  # the style id.  
+  # 
+  # Returns an Array of Album Objects.
+  def find_albums
+    album_ids =[]
+    results = CONNECTION.execute("SELECT * FROM albums_styles WHERE style_id = #{@id};")
+      results.each do |hash|
+        album_ids << hash["album_id"]
+      end
+      Album.find_many(album_ids)
+  end
 end
+
+
