@@ -19,19 +19,26 @@ class Album
     @title = options["title"]
     @year = options["year"]
   end
+  
+
+# Utility method to change a current name to new name
+# 
+# new_name - String used to replace name
+#
+# Returns an empty Array.
+def change_name(new_name)
+  CONNECTION.execute("UPDATE albums SET name = '#{new_name}' WHERE id = #{@id};")
 end
 
-   #
-  # # CREATE Album record, returns an empty Array.
-  # def self.add(title, year)
-  #   CONNECTION.execute("INSERT INTO albums (title, year) VALUES ('#{title}', #{year});")
-  #   return CONNECTION.last_insert_row_id
-  # end
-  # 
-  # INSERT INTO albums_styles VALUES (the return of Album.add, Style.id);
-  # INSERT INTO albums_styles VALUES (the return of Album.add, Style.id);(optional)
-  # INSERT INTO albums_artists VALUES(the return of Album.add, Artist.id);
-  # INSERT INTO albums_artists VALUES(the return of Album.add, Artist.id);
-  # INSERT INTO albums_artists VALUES(the return of Album.add, Artist.id);
-  #
-  #
+def find_artists
+ artist_results = CONNECTION.execute("SELECT * FROM artists JOIN albums_artists ON artists.id = albums_artists.artist_id
+WHERE albums_artists.album_id = #{@id};")
+artist_ids = []
+artist_results.each do |hash|
+  artist_ids << hash["artist_id"]
+end
+
+Artist.find_many(artist_ids)
+end
+
+end
