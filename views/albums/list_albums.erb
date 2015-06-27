@@ -1,0 +1,13 @@
+<p>Choose your Artist and we will display the Albums they are featured on:</p>
+
+<ul>  
+<% Album.all.each do |object| %>
+ <li>
+   <a href="display_albums/<%= object.id %>">
+     <%= object.title %>
+   </a>
+ </li>
+<% end %>
+</ul> 
+Don't see what you're looking for?  You can <a href="/albums/add_album_form">Add An Album</a>
+<br />

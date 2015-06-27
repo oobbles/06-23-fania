@@ -15,4 +15,5 @@ require_relative "models/style.rb"
 # Controllers
 require_relative "controllers/main.rb"
 require_relative "controllers/artists_controller.rb"
+require_relative "controllers/albums_controller.rb"
 
