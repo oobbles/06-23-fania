@@ -42,7 +42,7 @@ class Album
     Album.find(id)
   end
   
-  # Method creates entry in to lookup table TODO Should this iterate through the array?
+ 
   def set_style(style_id)
     CONNECTION.execute("INSERT INTO albums_styles (album_id, style_id) VALUES (#{@id}, #{style_id});")
   end
