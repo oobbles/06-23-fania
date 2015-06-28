@@ -42,11 +42,20 @@ class Album
     Album.find(id)
   end
   
- 
+  # Insert method for the lookup table albums_styles
+  #
+  # style_id - integer
+  #
+  # Returns and empty Array
   def set_style(style_id)
     CONNECTION.execute("INSERT INTO albums_styles (album_id, style_id) VALUES (#{@id}, #{style_id});")
   end
   
+  # Insert method for the lookup table albums_artists
+  #
+  # artist_id - integer
+  #
+  # Returns and empty Array
   def set_artist(artist_id)
     CONNECTION.execute("INSERT INTO albums_artists (album_id, artist_id) VALUES (#{@id}, #{artist_id});")
   end

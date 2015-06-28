@@ -17,6 +17,4 @@ get "/albums/list_albums" do
   erb :"/albums/list_albums"
 end
 
-
-
 #list styles

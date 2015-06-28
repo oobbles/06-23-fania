@@ -4,8 +4,21 @@ Fania Records was a New York based record label founded by Dominican-born compos
 <br />
 Let's dive in!
 <br />
-<a href="/artists/list_artists">Artists</a>
-<a href="/albums/list_albums">Albums</a>
+<p><a href="/artists/list_artists">Artists</a></p>
+<p><a href="/albums/list_albums">Albums</a></p>
+<br/>
 
 
+<!-- Here is the use of my musicbrainz gem -->
+<p>Artist of the week: Ray Baretto</p>
+  <% @artist=MusicBrainz::Artist.find_by_name("Ray Barretto") %>
+  <%=#@artist.release_groups[1].title%>
 
+  <ul>
+    <% @artist.release_groups.each do |object| %>
+    <li>
+      <%= object.title %> released <%x=object.first_release_date%>
+      <%=x.to_s.slice!(0..3)%>
+    </li>
+    <% end %>
+  </ul>

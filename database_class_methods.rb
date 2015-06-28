@@ -52,5 +52,14 @@ module DatabaseClassMethods
     end
     return results_as_objects 
   end
+ 
+  #This was required (I think) to use the musicbrainz gem
+  MusicBrainz.configure do |c|
+    # Application identity (required)
+    c.app_name = "My Music App"
+    c.app_version = "1.0"
+    c.contact = "support@mymusicapp.com"
+  end
+  
 
 end

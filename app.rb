@@ -1,6 +1,7 @@
 require "pry"
 require "sinatra"
 require "sinatra/reloader"
+require 'musicbrainz'
 
 # SQL/Database
 require "sqlite3"
@@ -16,4 +17,5 @@ require_relative "models/style.rb"
 require_relative "controllers/main.rb"
 require_relative "controllers/artists_controller.rb"
 require_relative "controllers/albums_controller.rb"
+
 
