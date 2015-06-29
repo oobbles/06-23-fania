@@ -2,7 +2,18 @@ require "active_support"
 require "active_support/inflector"
 
 module DatabaseClassMethods
-
+  
+  # utility method to dry up code
+  #
+  # returns Array of Objects
+  def results_as_objects(results)
+  results_as_objects = []
+  results.each do |result_hash|
+    results_as_objects << self.new(result_hash)
+  end
+  return results_as_objects    
+end
+ 
   # Get all of the rows for a table.
   #
   # Returns an Array containing Objects for each row.
@@ -11,12 +22,8 @@ module DatabaseClassMethods
 
     results = CONNECTION.execute("SELECT * FROM #{table_name}")
 
-    results_as_objects = []
+    results_as_objects(results)
 
-    results.each do |result_hash|
-      results_as_objects << self.new(result_hash)
-    end
-    return results_as_objects    
   end
 
   # Get a single row.
@@ -45,12 +52,7 @@ module DatabaseClassMethods
     table_name = self.to_s.pluralize.underscore
     results = CONNECTION.execute("SELECT * FROM #{table_name} WHERE id IN (#{array.join(",")})")
     
-    results_as_objects = []
-
-    results.each do |result_hash|
-      results_as_objects << self.new(result_hash)
-    end
-    return results_as_objects 
+    results_as_objects(results)
   end
  
   #This was required (I think) to use the musicbrainz gem

@@ -12,7 +12,6 @@ Let's dive in!
 <!-- Here is the use of my musicbrainz gem -->
 <p>Artist of the week: Ray Baretto</p>
   <% @artist=MusicBrainz::Artist.find_by_name("Ray Barretto") %>
-  <%=#@artist.release_groups[1].title%>
 
   <ul>
     <% @artist.release_groups.each do |object| %>
@@ -22,3 +21,4 @@ Let's dive in!
     </li>
     <% end %>
   </ul>
+  
