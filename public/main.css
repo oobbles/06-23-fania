@@ -99,13 +99,66 @@ textarea {
 
 
 
+nav {
+  font-family: 'Anton', sans-serif;
+}
 
+nav li {
+  color: #01acf6; 
+  background-color: #aa1f96; 
+  font-size: 6vw;
+  text-align: center;
+}
 
+#first {
+  color: #01acf6; 
+  background-color: #f11b27 ; 
+}
 
+#first a {
+color: #01acf6; 
+display: block;
+}
 
+#second {
+  color: #e90291; 
+  background-color: #aa1f96 ; 
+}
 
+#second a {
+color: #e90291; 
+display: block;
+}
 
+#third {
+  color: #f11b27; 
+  background-color: #01acf6; 
+}
 
+#third a {
+color: #f11b27;
+display: block;
+}
+
+a {
+  color: #01acf6;
+  text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+ 
+footer {
+  font-family: 'Anton', sans-serif;
+  color: #01acf6; 
+  background-color: #aa1f96; 
+  font-size: 6vw;
+  text-align: center;
+  display: block;
+  
+}
 
 
 
