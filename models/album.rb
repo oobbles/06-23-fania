@@ -20,15 +20,6 @@ class Album
     @year = options["year"]
   end
 
-  # Utility method to change a current name to new name
-  # 
-  # new_name - String used to replace name
-  #
-  # Returns an empty Array.
-  def change_name(new_name)
-    CONNECTION.execute("UPDATE albums SET name = '#{new_name}' WHERE id = #{@id};")
-  end
-
   # CREATE Album record
   #
   # name - String

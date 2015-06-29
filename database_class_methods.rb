@@ -3,23 +3,38 @@ require "active_support/inflector"
 
 module DatabaseClassMethods
   
-  # utility method to dry up code
+  # Utility method to dry up code
   #
-  # returns Array of Objects
+  # Returns the table name of the class it is called on.
+  def table_name
+    self.to_s.pluralize.underscore
+  end
+
+  # Utility method to dry up code
+  #
+  # Returns Array of Objects
   def results_as_objects(results)
   results_as_objects = []
-  results.each do |result_hash|
-    results_as_objects << self.new(result_hash)
+    results.each do |result_hash|
+      results_as_objects << self.new(result_hash)
+    end
+    return results_as_objects    
   end
-  return results_as_objects    
-end
+  # Utility method to change a current name to new name
+  # 
+  # field - String of the field name
+  #
+  # new_name - String used to replace name
+  #
+  # Returns an empty Array.
+  def change_name(field, new_name)
+    CONNECTION.execute("UPDATE #{table_name} SET #{field} = '#{new_name}' WHERE id = #{@id};")
+  end
  
   # Get all of the rows for a table.
   #
   # Returns an Array containing Objects for each row.
   def all
-    table_name = self.to_s.pluralize.underscore
-
     results = CONNECTION.execute("SELECT * FROM #{table_name}")
 
     results_as_objects(results)
@@ -32,8 +47,6 @@ end
   #
   # Returns an Array containing the Object of the row.
   def find(record_id)
-    table_name = self.to_s.pluralize.underscore
-
     results = CONNECTION.execute("SELECT * FROM #{table_name} WHERE id = #{record_id}")
     results_as_objects = []
 
@@ -49,7 +62,6 @@ end
   #
   # Returns Array of Objects
   def find_many(array)
-    table_name = self.to_s.pluralize.underscore
     results = CONNECTION.execute("SELECT * FROM #{table_name} WHERE id IN (#{array.join(",")})")
     
     results_as_objects(results)

@@ -41,15 +41,6 @@ class Artist
     id = CONNECTION.last_insert_row_id
     Artist.find(id)
   end
- 
-  # Utility method to change a current name to new name
-  # 
-  # new_name - String used to replace name
-  #
-  # Returns an empty Array.
-  def change_name(new_name)
-    CONNECTION.execute("UPDATE artists SET name = '#{new_name}' WHERE id = #{@id};")
-  end
 
   # Utility method to delete a current Artist. Does not allow an Artist to be
   # deleted if its ID is used in the albums_artists table. 
