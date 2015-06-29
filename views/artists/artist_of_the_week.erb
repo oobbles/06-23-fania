@@ -1,0 +1,15 @@
+
+
+<!-- Here is the use of my musicbrainz gem -->
+<p>Artist of the week: Ray Baretto</p>
+  <% @artist=MusicBrainz::Artist.find_by_name("Ray Barretto") %>
+
+  <ul>
+    <% @artist.release_groups.each do |object| %>
+    <li>
+      <%= object.title %> released <%x=object.first_release_date%>
+      <%=x.to_s.slice!(0..3)%>
+    </li>
+    <% end %>
+  </ul>
+  
