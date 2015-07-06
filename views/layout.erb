@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>FANIA</title>
-    <link rel="stylesheet" href="/normalize.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1">
     <link rel="stylesheet" href="/main.css">
     <link href='http://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>
     <!--[if lt IE 9]>
@@ -11,23 +11,25 @@
     <![endif]-->
   </head>
   <body>
+
+<header>
+
+<a href="/home" id="logo" alt="HOME"></a>
+
   <nav>
+    <a href="#" id="menu-icon"></a>
+
     <ul>
-      <li id="first"><a href="/artists/list_artists">A R T I S T S</a></li>
-      <li id="second"><a href="/albums/list_albums">A L B U M S</a></li>
-      <li id="third"><a href="/artists/artist_of_the_week">&#9733; O F  T H E  W E E K</a></li>
-      
+      <li><a href="/artists/list_artists">ARTISTS</a></li>
+      <li><a href="/albums/list_albums">ALBUMS</a></li>
+      <li><a href="/artists/artist_of_the_week">&#9733; OF THE WEEK</a></li>
     </ul>
   </nav>
-
-  <content>
+</header>
+  <section>
   <%= yield %>
-  </content>
+</section>
 
-  <footer>
-    <ul>
-      <li><a href="/home">H O M E</a></li>
-    </ul>
-  </footer>
+
   </body>
 </html>

@@ -1,6 +1,6 @@
 <p>Choose your favorite album and we will list the artist that are on it: </p>
-
-<ul>  
+<div class="columns">
+<ul>
 <% Album.all.each do |object| %>
  <li>
    <a href="display_albums/<%= object.id %>">
@@ -8,7 +8,10 @@
    </a>
  </li>
 <% end %>
-</ul> 
-Don't see what you're looking for?  
+<div style="clear:both"></div>
+</ul>
+</div>
+<p>
+Don't see what you're looking for?  <br>
 You can <a href="/albums/add_album_form">Add An Album</a>
-
+</p>

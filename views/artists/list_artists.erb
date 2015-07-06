@@ -1,6 +1,6 @@
 <p>Choose your Artist and we will display the Albums they are featured on:</p>
-
-<ul>  
+<div class="columns">
+<ul>
 <% Artist.all.each do |object| %>
  <li>
    <a href="display_artists/<%= object.id %>">
@@ -8,5 +8,7 @@
    </a>
  </li>
 <% end %>
-</ul> 
+<div style="clear:both"></div>
+</ul>
+</div>
 <br />

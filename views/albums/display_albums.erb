@@ -1,14 +1,15 @@
 <% x = Album.find(params["number"].to_i)%>
 
-Here Are The <%= x.title %> Listings:
-
-  <ul>  
+<p>Here Are The <%= x.title %> Listings:</p>
+<div class="columns">
+  <ul>
     <%x.find_artists.each do |object| %>
     <li>
       <%= object.name%>
     </li>
     <% end %>
-  </ul> 
+    <div style="clear:both"></div>
+  </ul>
+</div>
   <br />
 <p><a href="/albums/list_albums">Choose Another Album?</a></p>
-
